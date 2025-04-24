@@ -1,7 +1,8 @@
-import 'package:dailynotesapp/widgets/addnotebuttonsheet.dart';
-import 'package:dailynotesapp/widgets/customsearchicon.dart';
-import 'package:dailynotesapp/widgets/notescard.dart';
+
 import 'package:flutter/material.dart';
+import 'package:mahmoud/widgets/addnotebuttonsheet.dart';
+import 'package:mahmoud/widgets/customsearchicon.dart';
+import 'package:mahmoud/widgets/notescard.dart';
 
 class Notesview extends StatelessWidget {
   const Notesview({super.key});
