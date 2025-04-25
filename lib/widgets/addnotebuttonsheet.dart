@@ -1,70 +1,39 @@
+import 'package:dailynotes/cubits/addnotecubit/addnotecubit.dart';
+import 'package:dailynotes/cubits/addnotecubit/addnotestates.dart';
+import 'package:dailynotes/widgets/addnoteform.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mahmoud/widgets/customelevatedbutton.dart';
-import 'package:mahmoud/widgets/customtextformfield.dart';
+import 'package:flutter/material.dart' as models;
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Addnotebuttonsheet extends StatefulWidget {
-   const Addnotebuttonsheet({super.key});
+  const Addnotebuttonsheet({super.key});
 
   @override
   State<Addnotebuttonsheet> createState() => _AddnotebuttonsheetState();
 }
 
 class _AddnotebuttonsheetState extends State<Addnotebuttonsheet> {
-     GlobalKey<FormState> formkey = GlobalKey();
-      String? title , subtitle;
-      AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: formkey,
-      child: Container(
-        height: 400.h,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.r),
-            topRight: Radius.circular(20.r),
-          ),
-        ),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 20.h,
+    return BlocConsumer<AddnoteCubit,Addnote>(
+      listener: (context, state) {
+        if (state is AddnoteSuccess) {
+          Navigator.pop(context);
+        }
+        
+      },
+      builder: (BuildContext context, Object? state) { 
+        if (state is AddnoteLoading) {
+          return const Center(
+            child: models.CircularProgressIndicator(
+              color: Colors.white,
             ),
-            Customtextformfield(
-              onsaved:(value){
-                title = value;
-              } ,
-            ),
-            SizedBox(height: 20.h),
-            Customtextformfield(
-              onsaved:(value){
-                subtitle = value;
-              } ,
-            ),
-            Spacer(flex: 1,),
-            Customelevatedbutton(
-              onPressed: () {
-                if (formkey.currentState!.validate()) {
-                  formkey.currentState?.save();
-                  // Perform your action here
-                }
-                else {
-                  setState(() {
-                    autovalidateMode = AutovalidateMode.always;
-                  });
-                }
-              },
-            ),
-            SizedBox(
-              height: 20.h,
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
+          );
+        } else if (state is AddnoteError) {
+          return Center(
+            child: Text(state.error),
+          );
+        }
+        return  Addnoteform();},);}}
+ 

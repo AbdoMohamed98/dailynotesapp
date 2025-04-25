@@ -1,8 +1,9 @@
 // Bloc Cubit
+import 'package:dailynotes/cubits/addnotecubit/addnotestates.dart';
+import 'package:dailynotes/models/addnotemodel.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
-import 'package:mahmoud/cubits/addnotecubit/addnotestates.dart';
-import 'package:mahmoud/models/addnotemodel.dart';
+
 
 class AddnoteCubit extends Cubit<Addnote> {
   AddnoteCubit() : super(AddnoteInitial());

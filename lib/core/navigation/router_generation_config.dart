@@ -1,8 +1,8 @@
 
+import 'package:dailynotes/core/navigation/approutes.dart';
+import 'package:dailynotes/views/editnoteview.dart';
+import 'package:dailynotes/views/notesview.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mahmoud/core/navigation/approutes.dart';
-import 'package:mahmoud/views/editnoteview.dart';
-import 'package:mahmoud/views/notesview.dart';
 
 class RouterGenerationConfig {
   static GoRouter goRouter = GoRouter(
