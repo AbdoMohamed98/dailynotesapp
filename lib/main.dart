@@ -1,9 +1,11 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mahmoud/core/navigation/router_generation_config.dart';
+import 'package:mahmoud/cubits/addnotecubit/addnotecubit.dart';
 import 'package:mahmoud/models/addnotemodel.dart';
 
 void main() async {
@@ -24,13 +26,20 @@ class Dailynotesapp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child){
-      return MaterialApp.router(
-        routerConfig: RouterGenerationConfig.goRouter,
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.black
+      return MultiBlocProvider(
+        providers: [
+          BlocProvider<AddnoteCubit>(
+            create: (context) => AddnoteCubit(),
+          ),
+        ],
+        child: MaterialApp.router(
+          routerConfig: RouterGenerationConfig.goRouter,
+          theme: ThemeData(
+            scaffoldBackgroundColor: Colors.black
+          ),
+          debugShowCheckedModeBanner: false,
+        
         ),
-        debugShowCheckedModeBanner: false,
-      
       );}
     );
   }
