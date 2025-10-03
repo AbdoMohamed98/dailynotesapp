@@ -1,52 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class Customtextformfield extends StatelessWidget {
-   const Customtextformfield({super.key,required this.onsaved});
- final void Function(String?)? onsaved;
+  const Customtextformfield({
+    super.key,
+    this.onSaved,
+    this.maxLines,
+    this.height, this.validator, this.hintText,
+  });
+
+  final int? maxLines;
+  final double? height;
+  final String? Function(String?)? validator;
+  final String? hintText;
+   final void Function(String?)? onSaved;
+
   @override
   Widget build(BuildContext context) {
+    final bool hasFixedHeight = height != null;
+
     return SizedBox(
-      height: 50.h,
-      width: 300.h,
+      width: double.infinity,
+      height: height,
       child: TextFormField(
-        onSaved:onsaved ,
-        validator: (value) {
-          if (value?.isEmpty?? true) {
-            return 'Please enter a note';
-          } else {
-            return null;
-          }
-        },
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 16.sp,
-        ),
-        maxLines: 3,
-        decoration: InputDecoration(
-      
-          hintText: 'hello',
-          hintStyle: TextStyle(
-            color: Colors.white,
-            fontSize: 16.sp,
-          ),
-          fillColor: Colors.amber,border: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.amber),
-            borderRadius: BorderRadius.circular(10.r),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.amber),
-            borderRadius: BorderRadius.circular(10.r),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.amber),
-            borderRadius: BorderRadius.circular(10.r),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
-          ),
+        onSaved:onSaved ,
+        
+         validator:validator ,
+         
+
+        // ✅ Only supply minLines/maxLines when we are NOT expanding
+        minLines: hasFixedHeight ? null : 1,
+        maxLines: hasFixedHeight ? null : (maxLines ?? null),
+
+        expands: hasFixedHeight,                // true only if we gave a height
+        textAlignVertical: TextAlignVertical.top,
+        style: const TextStyle(color: Colors.white),
+
+        decoration:  InputDecoration(
+          hintText: hintText,
+          border: OutlineInputBorder(),
         ),
       ),
     );
   }
 }
+

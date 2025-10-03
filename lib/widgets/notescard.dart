@@ -7,7 +7,10 @@ import 'package:go_router/go_router.dart';
 
 
 class Notescard extends StatelessWidget {
-  const Notescard({super.key});
+  const Notescard({super.key, this.title, this.subtitle, this.date});
+    final String? title;
+   final String? subtitle;
+    final String? date;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,7 @@ class Notescard extends StatelessWidget {
                   title: Padding(
                     padding: EdgeInsets.only(top: 20.h),
                     child: Text(
-                      'Title',
+                      title ?? 'Title',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 20.sp,
@@ -52,7 +55,7 @@ class Notescard extends StatelessWidget {
                   subtitle: Padding(
                     padding: EdgeInsets.only(top: 20.h),
                     child: Text(
-                      'Subtitle',
+                      subtitle ?? 'Subtitle',
                       style: TextStyle(
                         color: Colors.black.withOpacity(0.6),
                         fontSize: 15.sp,
@@ -75,7 +78,7 @@ class Notescard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 20),
                       child: Text(
-                          'date',
+                          date ?? 'Date',
                           style: TextStyle(
                             color: Colors.black54,
                             fontSize: 13.sp,
