@@ -10,11 +10,15 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // also important!
   await Hive.initFlutter();
-  await Hive.openBox<Addnotemodel>('notesbox');
-   Hive.registerAdapter(AddnotemodelAdapter());
+
+  Hive.registerAdapter(AddnotemodelAdapter()); // register first
+  await Hive.openBox<Addnotemodel>('notesbox'); // then open
+
   runApp(const Dailynotesapp());
 }
+
 
 class Dailynotesapp extends StatelessWidget {
   const Dailynotesapp({super.key});
